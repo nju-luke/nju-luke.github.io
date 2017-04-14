@@ -1,0 +1,699 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PCA,opencv,sift," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="问题描述：opencv中knnMatch是一种蛮力匹配，基本原理是将待匹配图片的sift等特征与目标图片中的全部sift特征一对n的全量便利，找出相似度最高的前k个。当待匹配的图片增多时，需要的计算量太大，所以考虑是否可以通过降维的方式减少计算过程中的时间花费。  1. PCA降维从物理的角度来说，所有的数据都可以看作物体（object）在选定特征（坐标轴）上的投影，而这个数值的大小代表这个ob">
+<meta name="keywords" content="PCA,opencv,sift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过降维加速opencv中的knnMatch图像匹配">
+<meta property="og:url" content="http://yoursite.com/blog/2017/通过降维加速opencv中的knnMatch图像匹配-20170414/index.html">
+<meta property="og:site_name" content="穷则独善其身 达则兼济天下">
+<meta property="og:description" content="问题描述：opencv中knnMatch是一种蛮力匹配，基本原理是将待匹配图片的sift等特征与目标图片中的全部sift特征一对n的全量便利，找出相似度最高的前k个。当待匹配的图片增多时，需要的计算量太大，所以考虑是否可以通过降维的方式减少计算过程中的时间花费。  1. PCA降维从物理的角度来说，所有的数据都可以看作物体（object）在选定特征（坐标轴）上的投影，而这个数值的大小代表这个ob">
+<meta property="og:updated_time" content="2017-04-14T10:03:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过降维加速opencv中的knnMatch图像匹配">
+<meta name="twitter:description" content="问题描述：opencv中knnMatch是一种蛮力匹配，基本原理是将待匹配图片的sift等特征与目标图片中的全部sift特征一对n的全量便利，找出相似度最高的前k个。当待匹配的图片增多时，需要的计算量太大，所以考虑是否可以通过降维的方式减少计算过程中的时间花费。  1. PCA降维从物理的角度来说，所有的数据都可以看作物体（object）在选定特征（坐标轴）上的投影，而这个数值的大小代表这个ob">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/blog/2017/通过降维加速opencv中的knnMatch图像匹配-20170414/"/>
+
+
+
+
+
+  <title> 通过降维加速opencv中的knnMatch图像匹配 | 穷则独善其身 达则兼济天下 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">穷则独善其身 达则兼济天下</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            历程
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2017/通过降维加速opencv中的knnMatch图像匹配-20170414/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="波波杨">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="穷则独善其身 达则兼济天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                通过降维加速opencv中的knnMatch图像匹配
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-14T17:55:57+08:00">
+                2017-04-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/图像处理/" itemprop="url" rel="index">
+                    <span itemprop="name">图像处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>问题描述：opencv中knnMatch是一种蛮力匹配，基本原理是将待匹配图片的sift等特征与目标图片中的全部sift特征一对n的全量便利，找出相似度最高的前k个。当待匹配的图片增多时，需要的计算量太大，所以考虑是否可以通过降维的方式减少计算过程中的时间花费。</p>
+</blockquote>
+<h2 id="1-PCA降维"><a href="#1-PCA降维" class="headerlink" title="1. PCA降维"></a>1. PCA降维</h2><p>从物理的角度来说，所有的数据都可以看作物体（object）在选定特征（坐标轴）上的投影，而这个数值的大小代表这个object在这个特征上的表现力（强度）。为了尽可能详细的去表达一个或者一类object，有时候选取的特征会过多，就造成了数据冗余，而这些冗余的数据对于计算来说花费是十分昂贵的。所以涌现了诸如PCA，LDA，FA等降维的方式。PCA算法相当于对数据做了一次整体的分析，找出最能代表这些数据的特征（这些特征不一定是原始选定的特征，而因子分子FA则是在原有的特征中找出特征投影交大的一部分特征），并用这些特征去表示原始数据。用投影的理论来说，所有的物体不再向原来表示特征的坐标轴去投影，而是改为向新的特征对应的坐标轴去投影。</p>
+<h2 id="2-SVD实现降维"><a href="#2-SVD实现降维" class="headerlink" title="2. SVD实现降维"></a>2. SVD实现降维</h2><p>经典的SVD公式：$$M = U\Sigma V^{T}$$假设$M\in R^{m\times n},则U\in R^{m\times k}, \Sigma\in R^{k\times k},V\in R^{n\times k}$(其中$k=min(m, n)，U、V$是正交单位矩阵, $\Sigma$是对角矩阵)。<br>正交单位矩阵等价于一组正交基，其作用是可以对object在对应的特征方向做投影。不考虑物理意义的情况下，在等式两边同时乘以$U^T$得$U^TM=\Sigma V^T$ （或者$MV=U\Sigma$），即实现了矩阵在不同表象下的表示。另外，$\Sigma$中的特征值的大小代表了其对应的特征在数据集中所占的比例大小，所以结合PCA的定义，只需从SVD分解后的结果中找出较大特征值对应的特征向量对原数据做投影即可实现降维的效果。<br><strong>至于选U中的特征向量还是V中的特征向量，取决于M中特征feature是在表示为行还是列，比如不同的行表示不同的样本、不同的列表示不同的特征时选用后一个。另外，不同的软件svd所得到的结果中V可能不太一致，有的已经做过转置，对比行列维度即可。</strong></p>
+<h2 id="3-opencv中sift特征降维与匹配"><a href="#3-opencv中sift特征降维与匹配" class="headerlink" title="3. opencv中sift特征降维与匹配"></a>3. opencv中sift特征降维与匹配</h2><p>sift特征算是计算机视觉中较常用的一种特征表示，出于其旋转、缩放的不变性（这两个性质与其计算方式是相关的，缩放：通过前后层高斯金字塔计算，旋转：最后的128维特征都根据特定的规则选择主方向）在特征匹配中十分受欢迎。<br>python中sift特征计算：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cv2</div><div class="line">img1 = cv2.imread(<span class="string">'test1.jpg'</span>,<span class="number">0</span>)<span class="comment"># queryImage,参数0表示读取灰度图</span></div><div class="line">img2 = cv2.imread(<span class="string">"test2.jpg"</span>,<span class="number">0</span>) <span class="comment"># trainImage</span></div><div class="line"></div><div class="line"><span class="comment"># Initiate SIFT detector</span></div><div class="line">sift = cv2.SIFT()</div><div class="line"></div><div class="line">kp1, des1 = sift.detectAndCompute(img1,<span class="keyword">None</span>)</div><div class="line">kp2, des2 = sift.detectAndCompute(img2,<span class="keyword">None</span>)</div><div class="line"><span class="comment">#此处有两个返回值，</span></div><div class="line"><span class="comment">#其中kp包含sift特征的方向、位置、大小等信息</span></div><div class="line"><span class="comment">#其中des的shape为（sift_nb，128），sift_nb表示图像中检测到的sift特征数量</span></div></pre></td></tr></table></figure></p>
+<p>通过sift对两幅图片进行匹配：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">bf = cv2.BFMatcher()</div><div class="line">matches = bf.knnMatch(des1,des2, k=<span class="number">2</span>)</div><div class="line">fine_match = []</div><div class="line"><span class="keyword">for</span> m,n <span class="keyword">in</span> matches:</div><div class="line">    <span class="keyword">if</span> m.distance &lt; <span class="number">0.69</span>*n.distance:</div><div class="line">	    fine_match.append(m)</div><div class="line"><span class="comment">#对knn匹配的特征做判断，满足条件的定义为一个好的匹配点</span></div><div class="line"><span class="comment">#此处也可以借助RANSAC筛选</span></div></pre></td></tr></table></figure></p>
+<p>此处仅对两幅图片的特征做了比较，假设sift特征数分别为$sift_nb_1$,$ sift_nb_2$，则这一次匹配匹配的计算量$&gt;sift_nb_1 <em> sift_nb_2 </em> 128 <em>n $, 对于size为（200x100）左右的图片，其特征数已经可以超过100。假如图片更大一下，带检索的目标图片数量增加时，计算量将变得更加庞大。故此处采用SVD的方式实现PCA降维sift特征，从而加快计算。<br>**</em>首先需要解释的疑问是，sift特征本身是具有方向性的（旋转不变性的本质），降维以后是否还能保持方向性。PCA或者是SVD降维的本质是从高维向低维投影的算法，只需要对匹配的目标数据和待匹配数据做相同的投影，则得到的特征表示仍然保留了sift特征的方向性。<em>*</em><br>使用SVD实现PCA降维sift特征：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#des2_all = np.concatenate(des2_list,axis=0) #对多副图，先concat所有sift特征</span></div><div class="line"><span class="comment">#U,S,V = np.linalg.svd(des2_all)</span></div><div class="line">U,S,V = np.linalg.svd(des2)</div><div class="line">size_projected = <span class="number">32</span></div><div class="line">projector = V[:,:size_projected]</div><div class="line"><span class="comment">#for i in range(len(des2_list)):</span></div><div class="line"><span class="comment">#    des2_list[i] = des2_list[i].dot(projector)</span></div><div class="line">des2_new = des2.dot(projector)</div><div class="line">des1_new = des1.dot(projector)</div></pre></td></tr></table></figure></p>
+<p>对两组sift特征使用相同的特征向量投影，即获得了降维后的sift特征表示。实验中，第30维的特征值小于第一维的0.1倍（第30维的信息量已经少于第一维特征的10%），选取32维后时间花费上少了一倍多，而对结果的影响只有1~2%。PCA中的另外一种选择降维后的维度的方式是，看前多少维能代表一个合适比例的，假设为90%，维数k的选取规则为：$$min<em>{k} \frac{\Sigma </em>{i}^k\lambda<em>{i}}{\Sigma</em>{j}\lambda_{j}}&gt;90\%$$</p>
+<blockquote>
+<p><em>第一次写博客，手贱出去点了一下保存的草稿查看markdown语法，直接把未保存的博客全覆盖了，一下信凉了半截。想到新点开编辑的博客时，貌似是把之前的网页直接关闭的。然后恢复关闭的网页，万幸。。。</em></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PCA/" rel="tag"># PCA</a>
+          
+            <a href="/tags/opencv/" rel="tag"># opencv</a>
+          
+            <a href="/tags/sift/" rel="tag"># sift</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="波波杨" />
+          <p class="site-author-name" itemprop="name">波波杨</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-PCA降维"><span class="nav-number">1.</span> <span class="nav-text">1. PCA降维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-SVD实现降维"><span class="nav-number">2.</span> <span class="nav-text">2. SVD实现降维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-opencv中sift特征降维与匹配"><span class="nav-number">3.</span> <span class="nav-text">3. opencv中sift特征降维与匹配</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">波波杨</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
