@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="超级记忆," />
+  <meta name="keywords" content="深度学习,GPU,tensorflow," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="00—-&amp;gt;望远镜01—-&amp;gt;灵药02—-&amp;gt;铃儿03—-&amp;gt;(领赏)元宝04—-&amp;gt;零食05—-&amp;gt;礼物06—-&amp;gt;路标(领路)07—-&amp;gt;令旗08—-&amp;gt;泥巴09—-&amp;gt;菱角 0—-&amp;gt;鸡蛋1—-&amp;gt;树、铅笔、蜡烛、鱼、雨、妖2—-&amp;gt;鸭子、鹅、梁3—-&amp;gt;耳朵、山、屁股、酸菜、蒜4—-&amp;gt;旗子、帆船、 寺庙、士、小汽车5—-&amp;gt;">
-<meta name="keywords" content="超级记忆">
+<meta name="description" content="一直以来想试试用显卡做深度学习计算时什么感觉，刚开始学习神经网络的时候在AWS上开启过（当时开启显卡计算忘了关，一个多星期被收了1000多软妹币，好在AWS客服比较善良，沟通后直接把钱还给我了:smirk:）；中间有一次因也无需要在阿里云开了个GPU计算，那叫一个与时间赛跑，搭建环境分分钟都是钱:joy:；这次终于花重金，400大洋:thumbsdown::thumbsdown:自己买了个750t">
+<meta name="keywords" content="深度学习,GPU,tensorflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数字密码">
-<meta property="og:url" content="http://yoursite.com/blog/2017/数字密码-20170425/index.html">
+<meta property="og:title" content="Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu">
+<meta property="og:url" content="http://yoursite.com/blog/2017/Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu-20170524/index.html">
 <meta property="og:site_name" content="穷则独善其身 达则兼济天下">
-<meta property="og:description" content="00—-&amp;gt;望远镜01—-&amp;gt;灵药02—-&amp;gt;铃儿03—-&amp;gt;(领赏)元宝04—-&amp;gt;零食05—-&amp;gt;礼物06—-&amp;gt;路标(领路)07—-&amp;gt;令旗08—-&amp;gt;泥巴09—-&amp;gt;菱角 0—-&amp;gt;鸡蛋1—-&amp;gt;树、铅笔、蜡烛、鱼、雨、妖2—-&amp;gt;鸭子、鹅、梁3—-&amp;gt;耳朵、山、屁股、酸菜、蒜4—-&amp;gt;旗子、帆船、 寺庙、士、小汽车5—-&amp;gt;">
-<meta property="og:updated_time" content="2017-05-12T01:17:15.000Z">
+<meta property="og:description" content="一直以来想试试用显卡做深度学习计算时什么感觉，刚开始学习神经网络的时候在AWS上开启过（当时开启显卡计算忘了关，一个多星期被收了1000多软妹币，好在AWS客服比较善良，沟通后直接把钱还给我了:smirk:）；中间有一次因也无需要在阿里云开了个GPU计算，那叫一个与时间赛跑，搭建环境分分钟都是钱:joy:；这次终于花重金，400大洋:thumbsdown::thumbsdown:自己买了个750t">
+<meta property="og:updated_time" content="2017-05-24T08:15:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数字密码">
-<meta name="twitter:description" content="00—-&amp;gt;望远镜01—-&amp;gt;灵药02—-&amp;gt;铃儿03—-&amp;gt;(领赏)元宝04—-&amp;gt;零食05—-&amp;gt;礼物06—-&amp;gt;路标(领路)07—-&amp;gt;令旗08—-&amp;gt;泥巴09—-&amp;gt;菱角 0—-&amp;gt;鸡蛋1—-&amp;gt;树、铅笔、蜡烛、鱼、雨、妖2—-&amp;gt;鸭子、鹅、梁3—-&amp;gt;耳朵、山、屁股、酸菜、蒜4—-&amp;gt;旗子、帆船、 寺庙、士、小汽车5—-&amp;gt;">
+<meta name="twitter:title" content="Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu">
+<meta name="twitter:description" content="一直以来想试试用显卡做深度学习计算时什么感觉，刚开始学习神经网络的时候在AWS上开启过（当时开启显卡计算忘了关，一个多星期被收了1000多软妹币，好在AWS客服比较善良，沟通后直接把钱还给我了:smirk:）；中间有一次因也无需要在阿里云开了个GPU计算，那叫一个与时间赛跑，搭建环境分分钟都是钱:joy:；这次终于花重金，400大洋:thumbsdown::thumbsdown:自己买了个750t">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/blog/2017/数字密码-20170425/"/>
+  <link rel="canonical" href="http://yoursite.com/blog/2017/Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu-20170524/"/>
 
 
 
 
 
-  <title> 数字密码 | 穷则独善其身 达则兼济天下 </title>
+  <title> Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu | 穷则独善其身 达则兼济天下 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2017/数字密码-20170425/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2017/Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu-20170524/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="波波杨">
@@ -281,7 +281,7 @@
             
             
               
-                数字密码
+                Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu
               
             
           </h1>
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T08:57:23+08:00">
-                2017-04-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T16:15:22+08:00">
+                2017-05-24
               </time>
             
 
@@ -319,8 +319,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/超级记忆/" itemprop="url" rel="index">
-                    <span itemprop="name">超级记忆</span>
+                  <a href="/categories/技术修炼/" itemprop="url" rel="index">
+                    <span itemprop="name">技术修炼</span>
                   </a>
                 </span>
 
@@ -354,18 +354,13 @@
       
 
       
-        <p>00—-&gt;望远镜<br>01—-&gt;灵药<br>02—-&gt;铃儿<br>03—-&gt;(领赏)元宝<br>04—-&gt;零食<br>05—-&gt;礼物<br>06—-&gt;路标(领路)<br>07—-&gt;令旗<br>08—-&gt;泥巴<br>09—-&gt;菱角</p>
-<p>0—-&gt;鸡蛋<br>1—-&gt;树、铅笔、蜡烛、鱼、雨、妖<br>2—-&gt;鸭子、鹅、梁<br>3—-&gt;耳朵、山、屁股、酸菜、蒜<br>4—-&gt;旗子、帆船、 寺庙、士、小汽车<br>5—-&gt;钩子、虎、手、五角星、壶<br>6—-&gt;勺子、豆芽、陆、驴、牛、柳<br>7—-&gt;拐杖、镰刀、气、齐天大圣、锄头、鸡、漆<br>8—-&gt;葫芦、麻花、无穷<br>9—-&gt;猫、哨子、 酒、狗、韭菜<br>10—-&gt;棒球、石头、石林、衣领、窑洞、妖洞</p>
-<p>11—-&gt;筷子、平行线、铁路、双杠、雨衣<br>12—-&gt;婴儿、挂历、幺儿、鱼粮<br>13—-&gt;医生、雨伞、衣裳<br>14—-&gt;玫瑰、钥匙、玉石<br>15——&gt;鹦鹉、月亮、义乌、一壶、衣服、衣物、遗物、药物、玉壶<br>16—-&gt;杨柳、石榴、石牛、一楼<br>17—-&gt;仪器、幺鸡、妖气、一汽、石鸡、石刀<br>18—-&gt;彩票、篱笆、哑巴、药吧<br>19—-&gt;药酒、泥鳅、衣钩、石狗、石猫<br>20—-&gt;耳环、香烟、耳铃、耳洞</p>
-<p>21—-&gt;鳄鱼<br>22—-&gt;鸳鸯、娘娘<br>23—-&gt;乔丹、和尚、峨山、梁山、凉扇<br>24—-&gt;盒子、耳屎、饿死<br>25—-&gt;二胡、土屋<br>26—-&gt;河流、二流子、二楼<br>27—-&gt;耳机、爱妻<br>28—-&gt;荷花、恶霸、土坝<br>29—-&gt;阿胶、土狗、按钮<br>30—-&gt;三菱轿车、三轮车、山洞、山岭、山林、森林、山石</p>
-<p>31—-&gt;山芋、鲨鱼、鳝鱼、上衣、山药、山腰、狐狸<br>32—-&gt;扇儿、仙鹤、山鸭<br>33—-&gt;钻石（闪闪）、仙丹、星星、水波<br>34—-&gt;绅士、三丝（三毛）、绳子、三思、丧事、上司<br>35—-&gt;珊瑚、上午<br>36—-&gt;山鹿、山路、三楼、迷路、上楼<br>37—-&gt;山鸡、三七、生气、升旗<br>38—-&gt;妇女节、口红、伞把、散发、伤疤<br>39—-&gt;三角尺、三九感冒灵、酸角<br>40—-&gt;司令、失灵</p>
-<p>41—-&gt;司仪、 死鱼、四楼、示意、事宜<br>42—-&gt;柿儿、死鹅、死鸭、示爱、死俩<br>43—-&gt;石山、四川、师生、瓷砖、慈善<br>44—-&gt;石狮、试试、事事<br>45—-&gt;师父、石虎、清明节<br>46—-&gt;饲料、 死路、4楼、死牛<br>47—-&gt; 司机、死鸡、死机、市区<br>48—-&gt;石板、丝瓜、柿花、孤儿、市花<br>49—-&gt;天安门、湿狗、死狗、世界<br>50—-&gt;大刀、武林、武陵、舞林、虎胆</p>
-<p>51—-&gt;工人、舞衣<br>52—-&gt;斧儿、鼓儿、我爱<br>53—-&gt;乌纱帽、巫山、午餐、舞扇、虎山<br>54—-&gt;武士、青年节、舞狮、无事、虎屎、虎视、故事<br>55—-&gt;火车、马克思、勾勾、呜呜、污物<br>56—-&gt;蜗牛、5楼、瞎子<br>57—-&gt;武器、机关枪、光棍、乌鸡、无机、张无忌<br>58—-&gt;尾巴、苦瓜、无法、和尚(无发)<br>59—-&gt;五角星、武警、污垢<br>60—-&gt;榴莲、柳林、漏洞、绿林、牛洞、纽洞</p>
-<p>61—-&gt;儿童、牛医、牛妖、扭腰<br>62—-&gt;牛耳、扭耳、陆良<br>63—-&gt;刘三姐、流沙(沙僧）、 庐山、硫酸、牛头山、绿伞<br>64—-&gt;螺丝、牛屎、律师、烈士、劣势<br>65—-&gt;锣鼓、尿壶、露骨、落伍、螺母<br>66—-&gt;蝌蚪、大顺（划拳）、溜溜球<br>67—-&gt;油漆、楼梯、漏气、牛气(冲天)、怒气(战士)<br>68—-&gt;喇叭、路霸<br>69—-&gt;漏斗、牛角、溜狗、溜猫、绿球<br>70—-&gt;冰淇淋、麒麟、机灵、激灵、鸡蛋</p>
-<p>71—-&gt;奇异果、鸡翼、机翼、建党节、起义、歧义、鸡药<br>72—-&gt;企鹅、妻儿、乞儿<br>73—-&gt;花旗参、旗杆、鸡肝、沮丧<br>74—-&gt;骑士、气死、鸡屎、气势、歧视、启事<br>75—-&gt;舞女、西服、去污（洗洁精）<br>76—-&gt;汽油、气流、激流、鸡柳<br>77—-&gt;鹊桥、芦沟桥、七喜<br>78—-&gt;青蛙、西瓜<br>79—-&gt;气球、 汽油<br>80—-&gt;巴黎铁塔、百灵鸟</p>
-<p>81—-&gt;白蚁、 建军节、白衣、白玉、护士<br>82—-&gt;靶儿<br>83—-&gt;芭蕉扇、花生、巴山<br>84—-&gt;巴士<br>85—-&gt;宝物、白虎<br>86—-&gt;八路、白兔<br>87—-&gt;白旗、白棋<br>88—-&gt;爸爸、粑粑<br>89—-&gt;芭蕉、八角<br>90—-&gt;酒瓶</p>
-<p>91—-&gt;秋衣<br>92—-&gt;球儿<br>93—-&gt;救生圈<br>94—-&gt;教师、教室<br>95—-&gt;酒壶<br>96—-&gt;九头牛<br>97—-&gt;香港<br>98—-&gt;酒吧<br>99—-&gt;舅舅</p>
-<p>参考：<br><a href="http://blog.sina.com.cn/s/blog_6108e7910102uza8.html" target="_blank" rel="external">三十六计</a><br><a href="http://www.xuexila.com/jiyili/xunlian/71463.html" target="_blank" rel="external">记忆大师王峰的数字编码</a></p>
+        <p>一直以来想试试用显卡做深度学习计算时什么感觉，刚开始学习神经网络的时候在AWS上开启过（当时开启显卡计算忘了关，一个多星期被收了1000多软妹币，好在AWS客服比较善良，沟通后直接把钱还给我了:smirk:）；中间有一次因也无需要在阿里云开了个GPU计算，那叫一个与时间赛跑，搭建环境分分钟都是钱:joy:；这次终于花重金，400大洋:thumbsdown::thumbsdown:自己买了个750ti（原来的显卡是HD6850网游戏那是杠杠滴，这也是一直没换的原因），虽然牌子不咋地，但是一点就亮。</p>
+<h3 id="1-安装显卡驱动"><a href="#1-安装显卡驱动" class="headerlink" title="1. 安装显卡驱动"></a>1. 安装显卡驱动</h3><p>安装显卡驱动可能是最麻烦的，各种毛病。当然，如果不确定会不会遇到这些问题，那就直接装，看遇到什么问题在逐个排除。</p>
+<p><strong>nouveau</strong>加入黑名单<br>sudo vim /etc/modprobe.d/blacklist.conf<br>blacklist vga16fb<br>blacklist nouveau<br>blacklist rivafb<br>blacklist rivatv<br>blacklist nvidiafb</p>
+<p><strong>关闭图形界面</strong><br>sudo service lightdm stop<br>sudo service gdm stop (或者是gdm3)</p>
+<p>然后sudo sh NVIDIA-….-xxx.sh安装</p>
+<h3 id="2-安装Cuda-tools-cuDNN"><a href="#2-安装Cuda-tools-cuDNN" class="headerlink" title="2. 安装Cuda tools, cuDNN"></a>2. 安装Cuda tools, cuDNN</h3><p>Cuda默认带着显卡驱动，上一步装过显卡驱动，这里显卡驱动可以跳过。<br>cuDNN的安装过程：<br>tar -zxvf cudnn-8.0-linux-x64-v5.0-ga.tgz<br>sudo cp cuda/include/cudnn.h /usr/local/cuda/include/<br>sudo cp cuda/lib64/libcudnn<em> /usr/local/cuda/lib64/<br>sudo chmod a+r /usr/local/cuda/include/cudnn.h<br>sudo chmod a+r /usr/local/cuda/lib64/libcudnn</em></p>
+<h3 id="3-tensorflow"><a href="#3-tensorflow" class="headerlink" title="3. tensorflow"></a>3. tensorflow</h3><p>在tensorflow加入了pip安装过程后，tensorflow的安装变得极其简单。pip的安装方式可能会导致程序运行时提示从”SSE, AVX,FMA”编译可以加快cpu的运行速度，不过这个也无伤大雅。在前面两步执行成功以后，下面的命令安装的tensorflow可以 成功将gpu用上。750ti虽然不咋地，但比起本地cpu的运行速度，还是快了7倍以上。<br>pip install tensorflow-gpu</p>
 
       
     </div>
@@ -395,7 +390,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/超级记忆/" rel="tag"># 超级记忆</a>
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/GPU/" rel="tag"># GPU</a>
+          
+            <a href="/tags/tensorflow/" rel="tag"># tensorflow</a>
           
         </div>
       
@@ -408,18 +407,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/使用SoftEther连接内网电脑-20170524/" rel="next" title="使用SoftEther连接内网电脑">
-                <i class="fa fa-chevron-left"></i> 使用SoftEther连接内网电脑
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2017/通过降维加速opencv中的knnMatch图像匹配-20170414/" rel="prev" title="通过降维加速opencv中的knnMatch图像匹配">
-                通过降维加速opencv中的knnMatch图像匹配 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2017/使用SoftEther连接内网电脑-20170524/" rel="prev" title="使用SoftEther连接内网电脑">
+                使用SoftEther连接内网电脑 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -467,8 +462,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -530,6 +534,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装显卡驱动"><span class="nav-number">1.</span> <span class="nav-text">1. 安装显卡驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Cuda-tools-cuDNN"><span class="nav-number">2.</span> <span class="nav-text">2. 安装Cuda tools, cuDNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-tensorflow"><span class="nav-number">3.</span> <span class="nav-text">3. tensorflow</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

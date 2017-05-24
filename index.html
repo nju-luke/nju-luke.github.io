@@ -257,6 +257,307 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2017/Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu-20170524/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="波波杨">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="穷则独善其身 达则兼济天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/blog/2017/Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu-20170524/" itemprop="url">
+                  Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T16:15:22+08:00">
+                2017-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术修炼/" itemprop="url" rel="index">
+                    <span itemprop="name">技术修炼</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直以来想试试用显卡做深度学习计算时什么感觉，刚开始学习神经网络的时候在AWS上开启过（当时开启显卡计算忘了关，一个多星期被收了1000多软妹币，好在AWS客服比较善良，沟通后直接把钱还给我了:smirk:）；中间有一次因也无需要在阿里云开了个GPU计算，那叫一个与时间赛跑，搭建环境分分钟都是钱:joy:；这次终于花重金，400大洋:thumbsdown::thumbsdown:自己买了个750ti（原来的显卡是HD6850网游戏那是杠杠滴，这也是一直没换的原因），虽然牌子不咋地，但是一点就亮。</p>
+<h3 id="1-安装显卡驱动"><a href="#1-安装显卡驱动" class="headerlink" title="1. 安装显卡驱动"></a>1. 安装显卡驱动</h3><p>安装显卡驱动可能是最麻烦的，各种毛病。当然，如果不确定会不会遇到这些问题，那就直接装，看遇到什么问题在逐个排除。</p>
+<p><strong>nouveau</strong>加入黑名单<br>sudo vim /etc/modprobe.d/blacklist.conf<br>blacklist vga16fb<br>blacklist nouveau<br>blacklist rivafb<br>blacklist rivatv<br>blacklist nvidiafb</p>
+<p><strong>关闭图形界面</strong><br>sudo service lightdm stop<br>sudo service gdm stop (或者是gdm3)</p>
+<p>然后sudo sh NVIDIA-….-xxx.sh安装</p>
+<h3 id="2-安装Cuda-tools-cuDNN"><a href="#2-安装Cuda-tools-cuDNN" class="headerlink" title="2. 安装Cuda tools, cuDNN"></a>2. 安装Cuda tools, cuDNN</h3><p>Cuda默认带着显卡驱动，上一步装过显卡驱动，这里显卡驱动可以跳过。<br>cuDNN的安装过程：<br>tar -zxvf cudnn-8.0-linux-x64-v5.0-ga.tgz<br>sudo cp cuda/include/cudnn.h /usr/local/cuda/include/<br>sudo cp cuda/lib64/libcudnn<em> /usr/local/cuda/lib64/<br>sudo chmod a+r /usr/local/cuda/include/cudnn.h<br>sudo chmod a+r /usr/local/cuda/lib64/libcudnn</em></p>
+<h3 id="3-tensorflow"><a href="#3-tensorflow" class="headerlink" title="3. tensorflow"></a>3. tensorflow</h3><p>在tensorflow加入了pip安装过程后，tensorflow的安装变得极其简单。pip的安装方式可能会导致程序运行时提示从”SSE, AVX,FMA”编译可以加快cpu的运行速度，不过这个也无伤大雅。在前面两步执行成功以后，下面的命令安装的tensorflow可以 成功将gpu用上。750ti虽然不咋地，但比起本地cpu的运行速度，还是快了7倍以上。<br>pip install tensorflow-gpu</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2017/使用SoftEther连接内网电脑-20170524/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="波波杨">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="穷则独善其身 达则兼济天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/blog/2017/使用SoftEther连接内网电脑-20170524/" itemprop="url">
+                  使用SoftEther连接内网电脑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T12:43:47+08:00">
+                2017-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术修炼/" itemprop="url" rel="index">
+                    <span itemprop="name">技术修炼</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>使用SoftEther可实现到外网到公司内网的vpn连接，步骤如下：</p>
+<ol>
+<li><p>参考<a href="http://www.lichanglin.cn/softether%20server%E7%9A%84%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%EF%BC%88ubuntu%E3%80%81debian%EF%BC%89/" target="_blank" rel="external">softether server的安装配置（ubuntu、debian）</a>，先在长期运行的服务器端安装softEther，服务端安装好softEther后请参考下一步</p>
+</li>
+<li><p>需从外网访问最简单的方法可能是通过配置<a href="http://www.softether.org/4-docs/2-howto/6.VPN_Server_Behind_NAT_or_Firewall/2.VPN_Azure" target="_blank" rel="external">VPN Azure</a>，也许端口也可以实现（暂未尝试）。配置Azure，直接从<a href="http://www.softether-download.com/en.aspx?product=softether" target="_blank" rel="external">官网下载</a>Sever Manage，windows的比较好用。按照<a href="http://www.vpnazure.net/en/的左侧配置即可" target="_blank" rel="external">http://www.vpnazure.net/en/的左侧配置即可</a></p>
+</li>
+<li><p>客户端实现连接可参考右侧。我的windows是通过sstp的方式连上的，在mac下l2tp尝试了半天连不通</p>
+</li>
+</ol>
+<p>另外，服务器启动SoftEther后会变得很卡，至少对ssh远程连接是有很大影响的。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2017/数字密码-20170425/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -356,10 +657,10 @@
       
         
           
-            <p>00—-&gt;望远镜<br>01—-&gt;灵药<br>02—-&gt;铃儿<br>03—-&gt;(领赏)元宝<br>04—-&gt;零食<br>05—-&gt;鹦鹉<br>06—-&gt;路标(领路)<br>07—-&gt;令旗<br>08—-&gt;泥巴<br>09—-&gt;菱角</p>
-<p>0—-&gt;鸡蛋<br>1—-&gt;树、铅笔、蜡烛、鱼、雨、妖<br>2—-&gt;鸭子、鹅、梁、粮、爱、恶<br>3—-&gt;耳朵、山、屁股、酸菜、蒜<br>4—-&gt;旗子、帆船、 寺庙、士、死、屎、市、诗、师、小汽车<br>5—-&gt;钩子、虎、巫、手、五角星、壶、污<br>6—-&gt;勺子、豆芽、刘德华、陆、驴、牛、柳、路、妞、纽、扭<br>7—-&gt;拐杖、镰刀、妻、气、齐天大圣、锄头、鸡、漆、梯<br>8—-&gt;葫芦、眼镜、罚、法、麻花、无穷<br>9—-&gt;猫、哨子、 酒、久、旧、救、揪、狗、韭菜<br>10—-&gt;棒球、石头、石林、衣领、窑洞、妖洞、摇动、移动、要领</p>
-<p>11—-&gt;筷子、平行线、铁路、双杠、姨姨、雨衣<br>12—-&gt;婴儿、挂历、幺儿、鱼粮、一两<br>13—-&gt;医生、雨伞、衣裳、失散、一生<br>14—-&gt;玫瑰、钥匙、要死、遗失、意识、一世、玉石<br>15—-&gt;月亮、义乌、一壶、衣服、衣物、遗物、药物、玉壶<br>16—-&gt;杨柳、石榴、石牛、一路、一溜、一楼<br>17—-&gt;仪器、幺鸡、妖气、遗弃、一起、玉器、一汽、石鸡、石刀<br>18—-&gt;彩票、篱笆、哑巴、一把、药吧、要发、石坝<br>19—-&gt;药酒、泥鳅、衣钩、石狗、石猫<br>20—-&gt;耳环、香烟、耳铃、耳洞</p>
-<p>21—-&gt;鳄鱼<br>22—-&gt;鸳鸯、双胞、二两、双双、对对、鸳鸯、娘娘、兔儿、土鸭、涂鸦<br>23—-&gt;乔丹、和尚、峨山、梁山、凉扇、鸭屁<br>24—-&gt;盒子、闹钟、耳屎、饿死<br>25—-&gt;二胡、土屋<br>26—-&gt;河流、二流子、二楼<br>27—-&gt;耳机、爱妻<br>28—-&gt;荷花、恶霸、土坝<br>29—-&gt;阿胶、土狗、按钮<br>30—-&gt;三菱轿车、三轮车、山洞、山岭、山林、森林、山石</p>
+            <p>00—-&gt;望远镜<br>01—-&gt;灵药<br>02—-&gt;铃儿<br>03—-&gt;(领赏)元宝<br>04—-&gt;零食<br>05—-&gt;礼物<br>06—-&gt;路标(领路)<br>07—-&gt;令旗<br>08—-&gt;泥巴<br>09—-&gt;菱角</p>
+<p>0—-&gt;鸡蛋<br>1—-&gt;树、铅笔、蜡烛、鱼、雨、妖<br>2—-&gt;鸭子、鹅、梁<br>3—-&gt;耳朵、山、屁股、酸菜、蒜<br>4—-&gt;旗子、帆船、 寺庙、士、小汽车<br>5—-&gt;钩子、虎、手、五角星、壶<br>6—-&gt;勺子、豆芽、陆、驴、牛、柳<br>7—-&gt;拐杖、镰刀、气、齐天大圣、锄头、鸡、漆<br>8—-&gt;葫芦、麻花、无穷<br>9—-&gt;猫、哨子、 酒、狗、韭菜<br>10—-&gt;棒球、石头、石林、衣领、窑洞、妖洞</p>
+<p>11—-&gt;筷子、平行线、铁路、双杠、雨衣<br>12—-&gt;婴儿、挂历、幺儿、鱼粮<br>13—-&gt;医生、雨伞、衣裳<br>14—-&gt;玫瑰、钥匙、玉石<br>15——&gt;鹦鹉、月亮、义乌、一壶、衣服、衣物、遗物、药物、玉壶<br>16—-&gt;杨柳、石榴、石牛、一楼<br>17—-&gt;仪器、幺鸡、妖气、一汽、石鸡、石刀<br>18—-&gt;彩票、篱笆、哑巴、药吧<br>19—-&gt;药酒、泥鳅、衣钩、石狗、石猫<br>20—-&gt;耳环、香烟、耳铃、耳洞</p>
+<p>21—-&gt;鳄鱼<br>22—-&gt;鸳鸯、娘娘<br>23—-&gt;乔丹、和尚、峨山、梁山、凉扇<br>24—-&gt;盒子、耳屎、饿死<br>25—-&gt;二胡、土屋<br>26—-&gt;河流、二流子、二楼<br>27—-&gt;耳机、爱妻<br>28—-&gt;荷花、恶霸、土坝<br>29—-&gt;阿胶、土狗、按钮<br>30—-&gt;三菱轿车、三轮车、山洞、山岭、山林、森林、山石</p>
 <p>31—-&gt;山芋、鲨鱼、鳝鱼、上衣、山药、山腰、狐狸<br>32—-&gt;扇儿、仙鹤、山鸭<br>33—-&gt;钻石（闪闪）、仙丹、星星、水波<br>34—-&gt;绅士、三丝（三毛）、绳子、三思、丧事、上司<br>35—-&gt;珊瑚、上午<br>36—-&gt;山鹿、山路、三楼、迷路、上楼<br>37—-&gt;山鸡、三七、生气、升旗<br>38—-&gt;妇女节、口红、伞把、散发、伤疤<br>39—-&gt;三角尺、三九感冒灵、酸角<br>40—-&gt;司令、失灵</p>
 <p>41—-&gt;司仪、 死鱼、四楼、示意、事宜<br>42—-&gt;柿儿、死鹅、死鸭、示爱、死俩<br>43—-&gt;石山、四川、师生、瓷砖、慈善<br>44—-&gt;石狮、试试、事事<br>45—-&gt;师父、石虎、清明节<br>46—-&gt;饲料、 死路、4楼、死牛<br>47—-&gt; 司机、死鸡、死机、市区<br>48—-&gt;石板、丝瓜、柿花、孤儿、市花<br>49—-&gt;天安门、湿狗、死狗、世界<br>50—-&gt;大刀、武林、武陵、舞林、虎胆</p>
 <p>51—-&gt;工人、舞衣<br>52—-&gt;斧儿、鼓儿、我爱<br>53—-&gt;乌纱帽、巫山、午餐、舞扇、虎山<br>54—-&gt;武士、青年节、舞狮、无事、虎屎、虎视、故事<br>55—-&gt;火车、马克思、勾勾、呜呜、污物<br>56—-&gt;蜗牛、5楼、瞎子<br>57—-&gt;武器、机关枪、光棍、乌鸡、无机、张无忌<br>58—-&gt;尾巴、苦瓜、无法、和尚(无发)<br>59—-&gt;五角星、武警、污垢<br>60—-&gt;榴莲、柳林、漏洞、绿林、牛洞、纽洞</p>
@@ -601,7 +902,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -612,7 +913,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -623,7 +924,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
