@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="深度学习,GPU,tensorflow," />
+  <meta name="keywords" content="SourceTree,gitHub," />
 
 
 
@@ -87,17 +87,20 @@
 
 
 
-<meta name="description" content="一直以来想试试用显卡做深度学习计算时什么感觉，刚开始学习神经网络的时候在AWS上开启过（当时开启显卡计算忘了关，一个多星期被收了1000多软妹币，好在AWS客服比较善良，沟通后直接把钱还给我了:smirk:）；中间有一次因也无需要在阿里云开了个GPU计算，那叫一个与时间赛跑，搭建环境分分钟都是钱:joy:；这次终于花重金，400大洋:thumbsdown::thumbsdown:自己买了个750t">
-<meta name="keywords" content="深度学习,GPU,tensorflow">
+<meta name="description" content="1. 先在gitHub添加新的Repository，并复制url2. 【可选】 生成SSH Key 并添加到gitHub3. 在SourceTree中将已存在的文件夹添加到github1）在SourceTree中新建Repository，并找到对应文件夹 2）打开新建的Repository，点击Settings，设置远程Repository地址，将之前复制的url填入 3）先pull一次，将远程仓">
+<meta name="keywords" content="SourceTree,gitHub">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu">
-<meta property="og:url" content="http://yoursite.com/blog/2017/Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu-20170524/index.html">
+<meta property="og:title" content="使用SourceTree添加本地文件夹到github">
+<meta property="og:url" content="http://yoursite.com/blog/2017/使用SourceTree添加本地文件夹到github-20170602/index.html">
 <meta property="og:site_name" content="穷则独善其身 达则兼济天下">
-<meta property="og:description" content="一直以来想试试用显卡做深度学习计算时什么感觉，刚开始学习神经网络的时候在AWS上开启过（当时开启显卡计算忘了关，一个多星期被收了1000多软妹币，好在AWS客服比较善良，沟通后直接把钱还给我了:smirk:）；中间有一次因也无需要在阿里云开了个GPU计算，那叫一个与时间赛跑，搭建环境分分钟都是钱:joy:；这次终于花重金，400大洋:thumbsdown::thumbsdown:自己买了个750t">
-<meta property="og:updated_time" content="2017-05-24T08:15:42.000Z">
+<meta property="og:description" content="1. 先在gitHub添加新的Repository，并复制url2. 【可选】 生成SSH Key 并添加到gitHub3. 在SourceTree中将已存在的文件夹添加到github1）在SourceTree中新建Repository，并找到对应文件夹 2）打开新建的Repository，点击Settings，设置远程Repository地址，将之前复制的url填入 3）先pull一次，将远程仓">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79gy1fg753oag69j30qm0b6q52.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79gy1fg76dzn608j30lw0dcta3.jpg">
+<meta property="og:updated_time" content="2017-06-02T13:27:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu">
-<meta name="twitter:description" content="一直以来想试试用显卡做深度学习计算时什么感觉，刚开始学习神经网络的时候在AWS上开启过（当时开启显卡计算忘了关，一个多星期被收了1000多软妹币，好在AWS客服比较善良，沟通后直接把钱还给我了:smirk:）；中间有一次因也无需要在阿里云开了个GPU计算，那叫一个与时间赛跑，搭建环境分分钟都是钱:joy:；这次终于花重金，400大洋:thumbsdown::thumbsdown:自己买了个750t">
+<meta name="twitter:title" content="使用SourceTree添加本地文件夹到github">
+<meta name="twitter:description" content="1. 先在gitHub添加新的Repository，并复制url2. 【可选】 生成SSH Key 并添加到gitHub3. 在SourceTree中将已存在的文件夹添加到github1）在SourceTree中新建Repository，并找到对应文件夹 2）打开新建的Repository，点击Settings，设置远程Repository地址，将之前复制的url填入 3）先pull一次，将远程仓">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/006tNc79gy1fg753oag69j30qm0b6q52.jpg">
 
 
 
@@ -125,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/blog/2017/Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu-20170524/"/>
+  <link rel="canonical" href="http://yoursite.com/blog/2017/使用SourceTree添加本地文件夹到github-20170602/"/>
 
 
 
 
 
-  <title> Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu | 穷则独善其身 达则兼济天下 </title>
+  <title> 使用SourceTree添加本地文件夹到github | 穷则独善其身 达则兼济天下 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +263,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2017/Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu-20170524/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2017/使用SourceTree添加本地文件夹到github-20170602/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="波波杨">
@@ -281,7 +284,7 @@
             
             
               
-                Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu
+                使用SourceTree添加本地文件夹到github
               
             
           </h1>
@@ -296,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T16:15:22+08:00">
-                2017-05-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T21:27:24+08:00">
+                2017-06-02
               </time>
             
 
@@ -354,13 +357,9 @@
       
 
       
-        <p>一直以来想试试用显卡做深度学习计算时什么感觉，刚开始学习神经网络的时候在AWS上开启过（当时开启显卡计算忘了关，一个多星期被收了1000多软妹币，好在AWS客服比较善良，沟通后直接把钱还给我了:smirk:）；中间有一次因也无需要在阿里云开了个GPU计算，那叫一个与时间赛跑，搭建环境分分钟都是钱:joy:；这次终于花重金，400大洋:thumbsdown::thumbsdown:自己买了个750ti（原来的显卡是HD6850网游戏那是杠杠滴，这也是一直没换的原因），虽然牌子不咋地，但是一点就亮。</p>
-<h3 id="1-安装显卡驱动"><a href="#1-安装显卡驱动" class="headerlink" title="1. 安装显卡驱动"></a>1. 安装显卡驱动</h3><p>安装显卡驱动可能是最麻烦的，各种毛病。当然，如果不确定会不会遇到这些问题，那就直接装，看遇到什么问题在逐个排除。</p>
-<p><strong>nouveau</strong>加入黑名单<br>sudo vim /etc/modprobe.d/blacklist.conf<br>blacklist vga16fb<br>blacklist nouveau<br>blacklist rivafb<br>blacklist rivatv<br>blacklist nvidiafb</p>
-<p><strong>关闭图形界面</strong><br>sudo service lightdm stop<br>sudo service gdm stop (或者是gdm3)</p>
-<p>然后sudo sh NVIDIA-….-xxx.sh安装</p>
-<h3 id="2-安装Cuda-tools-cuDNN"><a href="#2-安装Cuda-tools-cuDNN" class="headerlink" title="2. 安装Cuda tools, cuDNN"></a>2. 安装Cuda tools, cuDNN</h3><p>Cuda默认带着显卡驱动，上一步装过显卡驱动，这里显卡驱动可以跳过。<br>cuDNN的安装过程：<br>tar -zxvf cudnn-8.0-linux-x64-v5.0-ga.tgz<br>sudo cp cuda/include/cudnn.h /usr/local/cuda/include/<br>sudo cp cuda/lib64/libcudnn<em> /usr/local/cuda/lib64/<br>sudo chmod a+r /usr/local/cuda/include/cudnn.h<br>sudo chmod a+r /usr/local/cuda/lib64/libcudnn</em></p>
-<h3 id="3-tensorflow"><a href="#3-tensorflow" class="headerlink" title="3. tensorflow"></a>3. tensorflow</h3><p>在tensorflow加入了pip安装过程后，tensorflow的安装变得极其简单。pip的安装方式可能会导致程序运行时提示从”SSE, AVX,FMA”编译可以加快cpu的运行速度，不过这个也无伤大雅。在前面两步执行成功以后，下面的命令安装的tensorflow可以 成功将gpu用上。750ti虽然不咋地，但比起本地cpu的运行速度，还是快了7倍以上。<br>pip install tensorflow-gpu</p>
+        <h3 id="1-先在gitHub添加新的Repository，并复制url"><a href="#1-先在gitHub添加新的Repository，并复制url" class="headerlink" title="1. 先在gitHub添加新的Repository，并复制url"></a>1. 先在gitHub添加新的Repository，并复制url</h3><h3 id="2-【可选】-生成SSH-Key-并添加到gitHub"><a href="#2-【可选】-生成SSH-Key-并添加到gitHub" class="headerlink" title="2. 【可选】 生成SSH Key 并添加到gitHub"></a>2. 【可选】 <a href="https://blog.igevin.info/posts/generate-ssh-key-for-git/" target="_blank" rel="external">生成SSH Key 并添加到gitHub</a></h3><h3 id="3-在SourceTree中将已存在的文件夹添加到github"><a href="#3-在SourceTree中将已存在的文件夹添加到github" class="headerlink" title="3. 在SourceTree中将已存在的文件夹添加到github"></a>3. 在SourceTree中将已存在的文件夹添加到github</h3><p>1）在SourceTree中新建Repository，并找到对应文件夹<br><img src="http://ww4.sinaimg.cn/large/006tNc79gy1fg753oag69j30qm0b6q52.jpg" alt=""></p>
+<p>2）打开新建的Repository，点击Settings，设置远程Repository地址，将之前复制的url填入<br><img src="http://ww4.sinaimg.cn/large/006tNc79gy1fg76dzn608j30lw0dcta3.jpg" alt=""></p>
+<p>3）先pull一次，将远程仓库的Readme文件同步过来，然后commit下，就可以push了</p>
 
       
     </div>
@@ -390,11 +389,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+            <a href="/tags/SourceTree/" rel="tag"># SourceTree</a>
           
-            <a href="/tags/GPU/" rel="tag"># GPU</a>
-          
-            <a href="/tags/tensorflow/" rel="tag"># tensorflow</a>
+            <a href="/tags/gitHub/" rel="tag"># gitHub</a>
           
         </div>
       
@@ -407,18 +404,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/使用SourceTree添加本地文件夹到github-20170602/" rel="next" title="使用SourceTree添加本地文件夹到github">
-                <i class="fa fa-chevron-left"></i> 使用SourceTree添加本地文件夹到github
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2017/使用SoftEther连接内网电脑-20170524/" rel="prev" title="使用SoftEther连接内网电脑">
-                使用SoftEther连接内网电脑 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2017/Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu-20170524/" rel="prev" title="Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu">
+                Ubuntu安装NVIDIA显卡驱动及tensorflow-gpu <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -548,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装显卡驱动"><span class="nav-number">1.</span> <span class="nav-text">1. 安装显卡驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Cuda-tools-cuDNN"><span class="nav-number">2.</span> <span class="nav-text">2. 安装Cuda tools, cuDNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-tensorflow"><span class="nav-number">3.</span> <span class="nav-text">3. tensorflow</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-先在gitHub添加新的Repository，并复制url"><span class="nav-number">1.</span> <span class="nav-text">1. 先在gitHub添加新的Repository，并复制url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-【可选】-生成SSH-Key-并添加到gitHub"><span class="nav-number">2.</span> <span class="nav-text">2. 【可选】 生成SSH Key 并添加到gitHub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-在SourceTree中将已存在的文件夹添加到github"><span class="nav-number">3.</span> <span class="nav-text">3. 在SourceTree中将已存在的文件夹添加到github</span></a></li></ol></div>
             
 
           </div>
