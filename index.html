@@ -280,7 +280,7 @@
               
                 
                 <a class="post-title-link" href="/blog/2017/《模式识别与机器学习》第一章-20170618/" itemprop="url">
-                  《PRML》第一章读书笔记
+                  《PRML》第一章 读书笔记.1
                 </a>
               
             
@@ -357,8 +357,8 @@
         
           
             <p>[TOC]</p>
-<h2 id="模式识别"><a href="#模式识别" class="headerlink" title="模式识别"></a>模式识别</h2><h3 id="1、模式识别："><a href="#1、模式识别：" class="headerlink" title="1、模式识别："></a>1、<strong>模式识别</strong>：</h3><p>使用算法自动发现数据中的规律，并利用这些规律实现回归、分类等任务。例如<strong>手写数字识别</strong>（MINIST数据）<img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fgp3424nf1j30pa0aq75d.jpg" alt=""></p>
-<h3 id="2、模式识别的几个步骤："><a href="#2、模式识别的几个步骤：" class="headerlink" title="2、模式识别的几个步骤："></a>2、模式识别的几个步骤：</h3><ul>
+<h2 id="模式识别概述"><a href="#模式识别概述" class="headerlink" title="模式识别概述"></a>模式识别概述</h2><h3 id="1、模式识别"><a href="#1、模式识别" class="headerlink" title="1、模式识别"></a>1、模式识别</h3><p>使用算法自动发现数据中的规律，并利用这些规律实现回归、分类等任务。例如<strong>手写数字识别</strong>（MINIST数据）<img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fgp3424nf1j30pa0aq75d.jpg" alt=""></p>
+<h3 id="2、模式识别的几个步骤"><a href="#2、模式识别的几个步骤" class="headerlink" title="2、模式识别的几个步骤"></a>2、模式识别的几个步骤</h3><ul>
 <li><p>特征工程（数据准备）：<br>①一般同一个算法需要的输入数据都是一致的<br>②有助于提高计算速度、收敛速度（如归一化）<img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fgp3dfjzrvj30gq05m754.jpg" alt="Fig.2" title="Fig.2"></p>
 </li>
 <li><p>模型（算法）设计：线性回归、支持向量机（SVM）、神经网络</p>
@@ -366,7 +366,7 @@
 <li><p>训练与验证：<br>1) 将数据按比例（$\eta=0.8$)将数据分为训练集与测试集；<br>2) 训练阶段，不断调整参数，以期模型能正确判断<br>3) 验证：通过验证模型在新的样本上的正确性一测试其泛化能力；如果训练阶段表现非常好、验证阶段表现太差则成为过拟合。（对过去了如指掌，对未来一无所知。 —Luke）</p>
 </li>
 </ul>
-<h3 id="3、三个任务："><a href="#3、三个任务：" class="headerlink" title="3、三个任务："></a>3、三个任务：</h3><ul>
+<h3 id="3、三个任务"><a href="#3、三个任务" class="headerlink" title="3、三个任务"></a>3、三个任务</h3><ul>
 <li><p>监督学习：从银行卡号识别别所属银行、对应卡产品，再比如手写数字识别、画出图片中的卡边界（Fig.2)</p>
 </li>
 <li><p>非监督学习：<a href="http://www.endolith.com/wordpress/2009/11/22/a-simple-fastica-example/" target="_blank" rel="external">鸡尾酒会问题</a>（使用独立成分分析）</p>
@@ -394,6 +394,42 @@
 </li>
 </ul>
 <p>  使用正则化以后，对于合适的正则化，复杂的模型也可以较好的拟合数据，并不会出现过拟合。而当正则化项过大时，也会出现欠拟合的情况。</p>
+<h2 id="概率论"><a href="#概率论" class="headerlink" title="概率论"></a>概率论</h2><p>模式识别中的一个关键概念：不确定性。造成不确定性的因素是噪声及有限的数据。结合决策理论，即便有用的信息不完整或者模糊不清，也可以做出相对最优的预测。</p>
+<h3 id="1、基本概念"><a href="#1、基本概念" class="headerlink" title="1、基本概念"></a>1、基本概念</h3><p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fgpdbo5eimj31cs0xgjw1.jpg" alt=""></p>
+<ul>
+<li>联合概率：$p(X=x<em>{i},Y=y</em>{j})=\frac{n_{ij}}{N}$</li>
+<li>边缘概率：$p(X=x<em>{i})=\sum</em>{j=1}^{2}p(X=x<em>{i},Y=y</em>{j})$</li>
+<li>条件概率：$p(Y=y_j|X=x<em>i)=\frac{n</em>{ij}}{n_i}$</li>
+</ul>
+<p>边缘概率的另一种表示：$p(X=x_i)=\frac{n_i}{N}$<br>所以得到：<br>$$<br>p(X=x_i,Y=y<em>j)=\frac{n</em>{ij}}{N}<br>=\frac{n_{ij}}{n_i}·\frac{n_i}{N}<br>=p(Y=y_j|X=x_i)p(X=x_i)<br>$$<br>独立变量：如果两个变量的联合概率可以分解为边缘概率的乘积，那么这两个变量独立。$P(a,b) = p(a)p(b)$</p>
+<blockquote>
+<p>思考： 上面图中的X，Y是否独立？</p>
+</blockquote>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fgpfun2ds4j30vu0nmwgo.jpg" style="zoom:40%"></p>
+<p>上面这幅图表示两幅图的颜色直方图分布，其中考虑了周期性。各个颜色值所对应的概率分布通过简单的数据统计与总数值相除得出。<br>$$<br>p(h)=\frac{n<em>h}{\sum</em>{i=0}^{255}n_i}<br>$$</p>
+<h3 id="2、-概率密度"><a href="#2、-概率密度" class="headerlink" title="2、 概率密度"></a>2、 概率密度</h3><p>对于连续变量，概率一般表示为概率密度$p(x)$,</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fgpey6ewpdj30ou0iq0tx.jpg" style="zoom:50%"></p>
+<p>已知概率密度为$p(x)$, 则x在区间(a,b)范围内的概率为$p(x\in(a,b))=\int_a^bp(x)dx$</p>
+<p>概率密度的性质：<br>$$<br>p(x) \ge 0<br>$$<br>$$<br>\int_{-\infty}^{\infty}p(x)dx = 1<br>$$</p>
+<p>累积概率函数（cdf）:<br>$$<br>P(x)=\int_{-\infty}^{x}p(x)dx<br>$$</p>
+<p>连续变量的边缘概率分布与联合概率分布：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fgpguqbif7j30gs05k74n.jpg" style="zoom:50"></p>
+<h3 id="3、-期望与协方差-以离散变量为例"><a href="#3、-期望与协方差-以离散变量为例" class="headerlink" title="3、 期望与协方差(以离散变量为例)"></a>3、 期望与协方差(以离散变量为例)</h3><p>期望：$E[f]=\sum_{x}p(x)f(x)$<br>​        $E[f]=\frac{1}{N}\sum f(x_n)$</p>
+<p>方差：$var[f]=E[(f(x)-E[f(x)])^2]$<br>​        $var[f]=E[f^2]-E[f]^2$</p>
+<p>协方差: $cov[x,y]=E_{x,y}[{x-E[x]}{y-E[y]}]$</p>
+<h3 id="4、-贝叶斯公式"><a href="#4、-贝叶斯公式" class="headerlink" title="4、 贝叶斯公式"></a>4、 贝叶斯公式</h3><p>$$<br>p(x,y)=p(x|y)p(y)=p(y|x)p(x)<br>$$</p>
+<p>$$<br>\Longrightarrow p(y|x)=\frac{p(x|y)p(y)}{p(x)}<br>$$</p>
+<blockquote>
+<p>我们之前听说，好莱坞影星安吉丽娜朱莉通过《纽约时报》向大家揭露了她惨痛的经历。因携带有BRCA1/2致癌基因，她有87%的机会患上乳腺癌（我们假设5年）。为了防患于未然，她决定切除双乳(确切说是切除双侧乳腺)。美国乳腺癌的发病率为0.236%（每年每1000成年妇女中有2.36个人患上癌症。普通妇女人群5年患癌概率1.18%。</p>
+<p>A:普通妇女5年癌症得病；</p>
+<p>B：BRCA1/2致癌基因阳性；</p>
+<p>P(A):普通妇女人群5年患癌概率1.18%；</p>
+<p>P(B｜A):乳腺癌病人中BRCA1/2致癌基因阳性检测率87%；</p>
+<p>P(A｜B):有阳性结果的条件下，安吉丽娜朱莉5年内患癌概率；</p>
+<p>P(B)：结果为阳性的总可能性=检查阳性中的真阳性+检查阴性中的真阳性。</p>
+<p>通过贝叶斯公式，</p>
+<p>P(A｜B)= P(B｜A)×P(A)/ P(B)=87%×1.18%/（87%×1.18%+13%×98.2%）=7.4%。</p>
+</blockquote>
 
           
         
