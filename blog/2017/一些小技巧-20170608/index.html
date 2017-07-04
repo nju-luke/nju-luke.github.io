@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="mongoDB中复制一个collection中的内容到另一个collection123db.getCollection(&amp;apos;collecton_name&amp;apos;).find().forEach(function(x)&amp;#123;    db.getCollection(&amp;apos;new_collecton_name&amp;apos;).insert(x);&amp;#125;)">
+<meta name="description" content="mongoDB中复制一个collection中的内容到另一个collection123db.getCollection(&amp;apos;collecton_name&amp;apos;).find().forEach(function(x)&amp;#123;    db.getCollection(&amp;apos;new_collecton_name&amp;apos;).insert(x);&amp;#125;) Pyhton中的路">
 <meta name="keywords" content="技术杂烩">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一些小技巧">
 <meta property="og:url" content="http://yoursite.com/blog/2017/一些小技巧-20170608/index.html">
 <meta property="og:site_name" content="穷则独善其身 达则兼济天下">
-<meta property="og:description" content="mongoDB中复制一个collection中的内容到另一个collection123db.getCollection(&amp;apos;collecton_name&amp;apos;).find().forEach(function(x)&amp;#123;    db.getCollection(&amp;apos;new_collecton_name&amp;apos;).insert(x);&amp;#125;)">
-<meta property="og:updated_time" content="2017-06-08T01:32:23.000Z">
+<meta property="og:description" content="mongoDB中复制一个collection中的内容到另一个collection123db.getCollection(&amp;apos;collecton_name&amp;apos;).find().forEach(function(x)&amp;#123;    db.getCollection(&amp;apos;new_collecton_name&amp;apos;).insert(x);&amp;#125;) Pyhton中的路">
+<meta property="og:updated_time" content="2017-06-21T11:58:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些小技巧">
-<meta name="twitter:description" content="mongoDB中复制一个collection中的内容到另一个collection123db.getCollection(&amp;apos;collecton_name&amp;apos;).find().forEach(function(x)&amp;#123;    db.getCollection(&amp;apos;new_collecton_name&amp;apos;).insert(x);&amp;#125;)">
+<meta name="twitter:description" content="mongoDB中复制一个collection中的内容到另一个collection123db.getCollection(&amp;apos;collecton_name&amp;apos;).find().forEach(function(x)&amp;#123;    db.getCollection(&amp;apos;new_collecton_name&amp;apos;).insert(x);&amp;#125;) Pyhton中的路">
 
 
 
@@ -355,6 +355,10 @@
 
       
         <p><strong>mongoDB中复制一个collection中的内容到另一个collection</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.getCollection(&apos;collecton_name&apos;).find().forEach(function(x)&#123;</div><div class="line">    db.getCollection(&apos;new_collecton_name&apos;).insert(x);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p><strong>Pyhton中的路径问题</strong>：从别的路径导入过来的类或者方法，执行时的目录为当前文件所在的目录。所以，当导入方法中包含相对路径时，应设法保证所有相对路径的起始位置相同。如，在某个文件中添加如下方法，所有包含相对路径的文件开头都用这个方法来初始化起始路径。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curr_path = os.path.split(os.path.abspath(__file__))[<span class="number">0</span>]</div><div class="line">os.chdir(curr_path)</div></pre></td></tr></table></figure>
+<p>另外在执行python文件时，默认工作目录为comandline中输入命令的目录，为了保证python中含有相对路径是不出错，在代码起始处加入下面这句</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">os.chdir(os.path.split(sys.argv[<span class="number">0</span>])[<span class="number">0</span>])</div><div class="line"><span class="comment">#例如：~$python projects/model/test.py</span></div><div class="line"><span class="comment">#上面的命令将命令的工作目录从~切换为model</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -472,7 +476,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
